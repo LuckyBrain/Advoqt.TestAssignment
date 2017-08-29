@@ -243,10 +243,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Scripts\angular-resource.js" />
-    <Content Include="Scripts\angular-resource.min.js">
-      <DependentUpon>angular-resource.js</DependentUpon>
-    </Content>
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js">
       <DependentUpon>angular.js</DependentUpon>

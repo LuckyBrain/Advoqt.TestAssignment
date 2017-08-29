@@ -7,6 +7,7 @@ var app;
                 this.$http = $http;
                 this.apiKey = "3271c88e42d3ddf385d5d94c8f15df76";
                 this.urlPrefix = "http://api.openweathermap.org/data/2.5/weather?units=imperial";
+                this.fDegreeHtml = "&#8457;";
             }
             CityListCtrl.prototype.showWeather = function (id) {
                 var _this = this;
@@ -21,8 +22,7 @@ var app;
             };
             CityListCtrl.prototype.displayWeather = function (response) {
                 var id = "weather" + response.id;
-                var html = "Temp. " + response.main.temp + "&#8457;";
-                document.getElementById(id).innerHTML = html;
+                document.getElementById(id).innerHTML = response.main.temp + this.fDegreeHtml;
             };
             return CityListCtrl;
         }());

@@ -34,7 +34,7 @@
             </td>
             <td>
                 @{
-                    var spanId = string.Format("weather{0}", item.Id);
+                    var spanId = $"weather{item.Id}";
                 }
                 <span id="@spanId"></span>
             </td>

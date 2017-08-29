@@ -6,21 +6,21 @@ module app.controllers {
     interface IWeatherData {
         id: number;
         main: {
-            temp: number,
-            pressure: number,
-            humidity: number,
-            temp_min: number,
-            temp_max: number
-        }
+            temp: number;
+            pressure: number;
+            humidity: number;
+            temp_min: number;
+            temp_max: number;
+        };
     }
 
     class CityListCtrl implements ICityListModel {
         apiKey = "3271c88e42d3ddf385d5d94c8f15df76";
         urlPrefix = "http://api.openweathermap.org/data/2.5/weather?units=imperial";
+        fDegreeHtml = "&#8457;";
 
         static $inject = ["$http"];
-        constructor(private $http: ng.IHttpService) {
-        }
+        constructor(private $http: ng.IHttpService) { }
 
         showWeather(id: number): void {
             var url = this.urlPrefix + "&id=" + id + "&APPID=" + this.apiKey;
@@ -35,8 +35,7 @@ module app.controllers {
 
         displayWeather(response: IWeatherData): void {
             var id = "weather" + response.id;
-            var html = "Temp. " + response.main.temp + "&#8457;";
-            document.getElementById(id).innerHTML = html;
+            document.getElementById(id).innerHTML = response.main.temp + this.fDegreeHtml;
         }
     }
 
