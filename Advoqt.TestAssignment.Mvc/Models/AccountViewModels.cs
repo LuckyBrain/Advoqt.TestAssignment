@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-
-namespace Advoqt.TestAssignment.Mvc.Models
+﻿namespace Advoqt.TestAssignment.Mvc.Models
 {
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+
     public class ExternalLoginConfirmationViewModel
     {
         [Required]
@@ -79,6 +79,10 @@ namespace Advoqt.TestAssignment.Mvc.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        [Required]
+        [Display(Name="Is administrator?")]
+        public bool IsAdmin { get; set; }
     }
 
     public class ResetPasswordViewModel

@@ -202,9 +202,27 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201708270058134_InitialCreate.cs" />
+    <Compile Include="Migrations\201708270058134_InitialCreate.Designer.cs">
+      <DependentUpon>201708270058134_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708272344489_ApplicationUser_IsAdmin.cs" />
+    <Compile Include="Migrations\201708272344489_ApplicationUser_IsAdmin.Designer.cs">
+      <DependentUpon>201708272344489_ApplicationUser_IsAdmin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708281945101_Unmap_ApplicationUser_IsAdmin.cs" />
+    <Compile Include="Migrations\201708281945101_Unmap_ApplicationUser_IsAdmin.Designer.cs">
+      <DependentUpon>201708281945101_Unmap_ApplicationUser_IsAdmin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708282227106_Map_ApplicationUser_IsAdmin.cs" />
+    <Compile Include="Migrations\201708282227106_Map_ApplicationUser_IsAdmin.Designer.cs">
+      <DependentUpon>201708282227106_Map_ApplicationUser_IsAdmin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -268,9 +286,13 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Users\Delete.cshtml" />
+    <Content Include="Views\Users\Index.cshtml" />
+    <Content Include="Views\Users\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Readwrite\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -284,6 +306,20 @@
   <ItemGroup>
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201708270058134_InitialCreate.resx">
+      <DependentUpon>201708270058134_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708272344489_ApplicationUser_IsAdmin.resx">
+      <DependentUpon>201708272344489_ApplicationUser_IsAdmin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708281945101_Unmap_ApplicationUser_IsAdmin.resx">
+      <DependentUpon>201708281945101_Unmap_ApplicationUser_IsAdmin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708282227106_Map_ApplicationUser_IsAdmin.resx">
+      <DependentUpon>201708282227106_Map_ApplicationUser_IsAdmin.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
