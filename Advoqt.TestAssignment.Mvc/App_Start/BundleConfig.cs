@@ -26,6 +26,11 @@ namespace Advoqt.TestAssignment.Mvc
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
+
+            bundles.Add(new ScriptBundle("~/bundles/app").Include(
+                "~/Scripts/angular.min.js",
+                "~/app/app.min.js",
+                "~/app/controllers/cityListCtrl.min.js"));
         }
     }
 }

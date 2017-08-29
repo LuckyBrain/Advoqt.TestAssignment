@@ -1,25 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Web.Mvc;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Advoqt.TestAssignment.Mvc;
-using Advoqt.TestAssignment.Mvc.Controllers;
-
-namespace Advoqt.TestAssignment.Mvc.Tests.Controllers
+﻿namespace Advoqt.TestAssignment.Mvc.Tests.Controllers
 {
+    using System.Web.Mvc;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using Mvc.Controllers;
+
     [TestClass]
     public class HomeControllerTest
     {
         [TestMethod]
-        public void Index()
+        public async void Index()
         {
             // Arrange
-            HomeController controller = new HomeController();
+            var controller = new HomeController();
 
             // Act
-            ViewResult result = controller.Index() as ViewResult;
+            var result = await controller.Index() as ViewResult;
 
             // Assert
             Assert.IsNotNull(result);
@@ -29,10 +24,10 @@ namespace Advoqt.TestAssignment.Mvc.Tests.Controllers
         public void About()
         {
             // Arrange
-            HomeController controller = new HomeController();
+            var controller = new HomeController();
 
             // Act
-            ViewResult result = controller.About() as ViewResult;
+            var result = controller.About() as ViewResult;
 
             // Assert
             Assert.AreEqual("Your application description page.", result.ViewBag.Message);
@@ -42,10 +37,10 @@ namespace Advoqt.TestAssignment.Mvc.Tests.Controllers
         public void Contact()
         {
             // Arrange
-            HomeController controller = new HomeController();
+            var controller = new HomeController();
 
             // Act
-            ViewResult result = controller.Contact() as ViewResult;
+            var result = controller.Contact() as ViewResult;
 
             // Assert
             Assert.IsNotNull(result);

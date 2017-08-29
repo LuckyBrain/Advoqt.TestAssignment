@@ -1,0 +1,44 @@
+[
+  {
+    "outputFileName": "app/common/services/common.services.min.js",
+    "inputFiles": [
+      "app/common/services/common.services.js"
+    ]
+  },
+  {
+    "outputFileName": "app/common/services/dataAccessService.min.js",
+    "inputFiles": [
+      "app/common/services/dataAccessService.js"
+    ]
+  },
+  {
+    "outputFileName": "app/app.min.js",
+    "inputFiles": [
+      "app/app.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/angular.min.js",
+    "inputFiles": [
+      "Scripts/angular.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/angular-resource.min.js",
+    "inputFiles": [
+      "Scripts/angular-resource.js"
+    ]
+  },
+  {
+    "outputFileName": "app/domain/cityListCtrl.min.js",
+    "inputFiles": [
+      "app/domain/cityListCtrl.js"
+    ]
+  },
+  {
+    "outputFileName": "app/controllers/cityListCtrl.min.js",
+    "inputFiles": [
+      "app/controllers/cityListCtrl.js"
+    ]
+  }
+]
