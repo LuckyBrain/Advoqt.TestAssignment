@@ -130,20 +130,11 @@
     <Reference Include="System.Web.Http.WebHost">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.3\lib\net45\System.Web.Http.WebHost.dll</HintPath>
     </Reference>
-    <Reference Include="EntityFramework">
-      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
-    </Reference>
-    <Reference Include="EntityFramework.SqlServer">
-      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Core">
       <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Owin">
       <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.2.1\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.AspNet.Identity.EntityFramework">
-      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.1\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="Owin">
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
@@ -178,15 +169,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Abstract\IDataAccess.cs" />
+    <Compile Include="Services\ApplicationUserManager.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="Services\EmailService.cs" />
+    <Compile Include="Services\SmsService.cs" />
+    <Compile Include="Services\CustomUserStore.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
-    <Compile Include="App_Start\IdentityConfig.cs" />
+    <Compile Include="Services\ApplicationSignInManager.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Abstract\ILocationsRepository.cs" />
+    <Compile Include="Models\CustomIdentityUser.cs" />
     <Compile Include="Models\LocationModel.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -201,25 +197,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201708270058134_InitialCreate.cs" />
-    <Compile Include="Migrations\201708270058134_InitialCreate.Designer.cs">
-      <DependentUpon>201708270058134_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201708272344489_ApplicationUser_IsAdmin.cs" />
-    <Compile Include="Migrations\201708272344489_ApplicationUser_IsAdmin.Designer.cs">
-      <DependentUpon>201708272344489_ApplicationUser_IsAdmin.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201708281945101_Unmap_ApplicationUser_IsAdmin.cs" />
-    <Compile Include="Migrations\201708281945101_Unmap_ApplicationUser_IsAdmin.Designer.cs">
-      <DependentUpon>201708281945101_Unmap_ApplicationUser_IsAdmin.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201708282227106_Map_ApplicationUser_IsAdmin.cs" />
-    <Compile Include="Migrations\201708282227106_Map_ApplicationUser_IsAdmin.Designer.cs">
-      <DependentUpon>201708282227106_Map_ApplicationUser_IsAdmin.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -322,20 +301,6 @@
   <ItemGroup>
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201708270058134_InitialCreate.resx">
-      <DependentUpon>201708270058134_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201708272344489_ApplicationUser_IsAdmin.resx">
-      <DependentUpon>201708272344489_ApplicationUser_IsAdmin.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201708281945101_Unmap_ApplicationUser_IsAdmin.resx">
-      <DependentUpon>201708281945101_Unmap_ApplicationUser_IsAdmin.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201708282227106_Map_ApplicationUser_IsAdmin.resx">
-      <DependentUpon>201708282227106_Map_ApplicationUser_IsAdmin.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="app\app.ts" />
