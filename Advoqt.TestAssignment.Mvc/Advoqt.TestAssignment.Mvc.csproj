@@ -245,6 +245,7 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <None Include="sql\Create AdvoqtTestAssignment database.sql" />
+    <Content Include="sql\upgrades\01 Create SPs.sql" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

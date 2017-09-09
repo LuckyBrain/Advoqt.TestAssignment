@@ -32,13 +32,20 @@
         private TUser FindUser(string userId = null, string userName = null, string email = null)
         {
             const string Sql = @"
-SELECT *
-FROM dbo.AspNetUsers X
-WHERE   (@userId IS NULL OR X.Id = @userId)
-    AND (@userName IS NULL OR X.UserName = @userName)
-    AND (@email IS NULL OR X.Email = @email)";
+EXEC dbo.usp_GetUsers
+    @userId = @userId,
+    @userName = @userName,
+    @email = @email";
             var sequence = _dataAccess.GetSequence<TUser>(Sql, new { userId, userName, email });
             return sequence.FirstOrDefault();
+        }
+
+        private IEnumerable<TUser> GetAllUsers()
+        {
+            const string Sql = @"
+EXEC dbo.usp_GetUsers";
+            var sequence = _dataAccess.GetSequence<TUser>(Sql);
+            return sequence;
         }
 
         public Task CreateAsync(TUser user)
@@ -48,26 +55,12 @@ WHERE   (@userId IS NULL OR X.Id = @userId)
             return Task.Run(() =>
             {
                 const string Sql = @"
-INSERT dbo.AspNetUsers
-	(Id, Email, EmailConfirmed, PasswordHash, PhoneNumberConfirmed, TwoFactorEnabled, LockoutEnabled, AccessFailedCount, UserName, IsAdmin)
-SELECT
-	Id = @id,
-	Email = @email,
-	EmailConfirmed = 0,
-	PasswordHash = @passwordHash,
-    PhoneNumberConfirmed = 0,
-	TwoFactorEnabled = 0,
-	LockoutEnabled = 0,
-	AccessFailedCount = 0,
-	UserName = @userName,
-	IsAdmin = @isAdmin
-WHERE	NOT EXISTS
-		(
-			SELECT *
-			FROM dbo.AspNetUsers
-			WHERE	Email = @email
-				OR	UserName = @userName
-		)";
+EXEC dbo.usp_AddUser
+    @id = @id,
+    @userName = @userName,
+    @email = @email,
+	@passwordHash = @passwordHash,
+	@isAdmin = @isAdmin";
                 _dataAccess.Execute(Sql, new { user.Id, user.Email, user.PasswordHash, user.UserName, user.IsAdmin });
             });
         }
@@ -79,9 +72,9 @@ WHERE	NOT EXISTS
             return Task.Run(() =>
             {
                 const string Sql = @"
-UPDATE dbo.AspNetUsers SET
-	PasswordHash = @passwordHash
-WHERE	Id = @id";
+EXEC dbo.usp_ModifyUser
+    @id = @id,
+	@passwordHash = @passwordHash";
                 _dataAccess.Execute(Sql, new { user.Id, user.PasswordHash });
             });
         }
@@ -93,8 +86,8 @@ WHERE	Id = @id";
             return Task.Run(() =>
             {
                 const string Sql = @"
-DELETE dbo.AspNetUsers
-WHERE   Id = @id";
+EXEC dbo.usp_RemoveUser
+    @id = @id";
                 _dataAccess.Execute(Sql, new { user.Id });
             });
         }
@@ -160,15 +153,6 @@ WHERE   Id = @id";
         }
 
         public IQueryable<TUser> Users => GetAllUsers().AsQueryable();
-
-        private IEnumerable<TUser> GetAllUsers()
-        {
-            const string Sql = @"
-SELECT *
-FROM dbo.AspNetUsers X";
-            var sequence = _dataAccess.GetSequence<TUser>(Sql);
-            return sequence;
-        }
 
         public Task<DateTimeOffset> GetLockoutEndDateAsync(TUser user)
         {
