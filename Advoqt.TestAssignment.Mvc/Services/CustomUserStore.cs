@@ -29,6 +29,18 @@
             // nothing to do by now but required by the interface
         }
 
+        private TUser FindUser(string userId = null, string userName = null, string email = null)
+        {
+            const string Sql = @"
+SELECT *
+FROM dbo.AspNetUsers X
+WHERE   (@userId IS NULL OR X.Id = @userId)
+    AND (@userName IS NULL OR X.UserName = @userName)
+    AND (@email IS NULL OR X.Email = @email)";
+            var sequence = _dataAccess.GetSequence<TUser>(Sql, new { userId, userName, email });
+            return sequence.FirstOrDefault();
+        }
+
         public Task CreateAsync(TUser user)
         {
             if (user == null) throw new ArgumentNullException(nameof(user));
@@ -89,28 +101,12 @@ WHERE   Id = @id";
 
         public Task<TUser> FindByIdAsync(string userId)
         {
-            return Task.Run(() =>
-            {
-                const string Sql = @"
-SELECT *
-FROM dbo.AspNetUsers X
-WHERE   X.Id = @userId";
-                var sequence = _dataAccess.GetSequence<TUser>(Sql, new { userId });
-                return sequence.FirstOrDefault();
-            });
+            return Task.Run(() => FindUser(userId: userId));
         }
 
         public Task<TUser> FindByNameAsync(string userName)
         {
-            return Task.Run(() =>
-            {
-                const string Sql = @"
-SELECT *
-FROM dbo.AspNetUsers X
-WHERE   X.UserName = @userName";
-                var sequence = _dataAccess.GetSequence<TUser>(Sql, new { userName });
-                return sequence.FirstOrDefault();
-            });
+            return Task.Run(() => FindUser(userName: userName));
         }
 
         public Task SetPasswordHashAsync(TUser user, string passwordHash)
@@ -160,15 +156,7 @@ WHERE   X.UserName = @userName";
 
         public Task<TUser> FindByEmailAsync(string email)
         {
-            return Task.Run(() =>
-            {
-                const string Sql = @"
-SELECT *
-FROM dbo.AspNetUsers X
-WHERE   X.Email = @email";
-                var sequence = _dataAccess.GetSequence<TUser>(Sql, new { email });
-                return sequence.FirstOrDefault();
-            });
+            return Task.Run(() => FindUser(email: email));
         }
 
         public IQueryable<TUser> Users => GetAllUsers().AsQueryable();
